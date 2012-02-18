@@ -9,88 +9,55 @@
 
   <name>Ronin Webservices</name>
 
+  <parent>
+    <groupId>org.gosu-lang</groupId>
+    <artifactId>gosu-project-parent</artifactId>
+    <version>4</version>
+  </parent>
+
   <repositories>
     <repository>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <id>gosu-lang.org</id>
-      <name>Official Gosu website</name>
-      <url>http://gosu-lang.org/m2</url>
+      <id>gosu-lang.org-releases</id>
+      <name>Official Gosu website (releases)</name>
+      <url>http://gosu-lang.org/nexus/content/groups/releases</url>
     </repository>
   </repositories>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <id>gosu-lang.org</id>
-      <name>Official Gosu website</name>
-      <url>http://gosu-lang.org/m2</url>
-    </pluginRepository>
-  </pluginRepositories>
+
+  <scm>
+    <connection>scm:git:git@github.com:carsongross/roninWS.git</connection>
+    <url>scm:git:git@github.com:carsongross/roninWS.git</url>
+    <developerConnection>scm:git:git@github.com:carsongross/roninWS.git</developerConnection>
+  </scm>
+
 
   <dependencies>
     <dependency>
       <groupId>org.gosu-lang.gosu</groupId>
       <artifactId>gosu-webservices</artifactId>
-      <version>0.9-SNAPSHOT</version>
+      <version>0.9-10</version>
     </dependency>
   </dependencies>
 
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>test</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </testResource>
-    </testResources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.gosu-lang</groupId>
+          <artifactId>maven-gosu-plugin</artifactId>
+          <configuration>
+            <gosuVersion>0.9-10</gosuVersion>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.gosu-lang</groupId>
-        <artifactId>maven-gosu-plugin</artifactId>
-        <version>1.0</version>
-        <executions>
-          <execution>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>insert-gosu-artifact</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <gosuVersion>0.9-SNAPSHOT</gosuVersion>
-          <includeImpl>true</includeImpl> <!-- TODO: naughty, naughty -->
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.2</version>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.2.2</version>
         <configuration>
-          <archive>
-            <manifest>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-            </manifest>
-          </archive>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
         </configuration>
       </plugin>
     </plugins>
